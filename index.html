@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JK CYBER - Digital Services & Stationery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'scroll': 'scroll 20s linear infinite',
+                    },
+                    keyframes: {
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* Mobile-friendly touch target adjustments */
+        button,
+        a {
+            touch-action: manipulation;
+        }
+
+        .hero-pattern {
+            background-color: #0f172a;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%231e293b' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM6 34v-4H2v4H2v4h4v4h4v-4h4v-4H6zM6 4V0H2v4H2v4h4v4h4V8h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Card Styles - optimized for mobile viewing without hover */
+        .product-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:active {
+            transform: scale(0.98);
+        }
+
+        .toast {
+            visibility: hidden;
+            min-width: 90%;
+            /* Wide on mobile */
+            max-width: 400px;
+            background-color: #1f2937;
+            color: #fff;
+            text-align: center;
+            border-radius: 12px;
+            padding: 16px;
+            position: fixed;
+            z-index: 60;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%) translateY(20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            bottom: 80px;
+            /* Above floating button */
+        }
+
+        /* Portfolio Overlay - Always visible on mobile style */
+        .portfolio-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+        }
+
+        /* Floating WhatsApp Button Pulse */
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        .whatsapp-pulse {
+            animation: pulse-green 2s infinite;
+        }
+
+        /* Pricing Card Checkmark */
+        .check-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+
+<body
+    class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-200 selection:text-brand-900 pb-16 md:pb-0">
+
+    <!-- Floating WhatsApp Button (Mobile Essential) -->
+    <a href="https://wa.me/254110868366?text=Hello JK Cyber, I have an inquiry." target="_blank"
+        class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl whatsapp-pulse hover:scale-110 transition duration-300 flex items-center justify-center w-16 h-16">
+        <i class="fa-brands fa-whatsapp text-4xl"></i>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-40 glass-nav border-b border-slate-200 shadow-sm transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div
+                        class="bg-gradient-to-br from-brand-500 to-brand-700 text-white p-2.5 rounded-xl shadow-lg shadow-brand-500/30">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-2xl text-slate-900 leading-none tracking-tight">JK <span
+                                class="text-brand-600">CYBER</span></span>
+                        <span class="text-[0.65rem] font-bold text-slate-500 tracking-widest uppercase">Digital
+                            Solutions</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">About</a>
+                    <a href="#services"
+                        class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Services</a>
+                    <a href="#pricing"
+                        class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Pricing</a>
+                    <a href="#shop" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Shop</a>
+                    <a href="#contact"
+                        class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-md hover:shadow-brand-500/30 transform hover:-translate-y-0.5">
+                        Contact Us
+                    </a>
+                    <div class="relative cursor-pointer group" id="cart-btn">
+                        <div class="p-2 rounded-full hover:bg-slate-100 transition">
+                            <i
+                                class="fa-solid fa-cart-shopping text-slate-600 text-xl group-hover:text-brand-600 transition"></i>
+                        </div>
+                        <span id="cart-count"
+                            class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden border-2 border-white">0</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <div class="relative cursor-pointer" id="mobile-cart-btn">
+                        <div class="p-2 rounded-full bg-slate-100">
+                            <i class="fa-solid fa-cart-shopping text-slate-700 text-lg"></i>
+                        </div>
+                        <span id="mobile-cart-count"
+                            class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden border-2 border-white">0</span>
+                    </div>
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-brand-600 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#about"
+                    class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50 transition"><i
+                        class="fa-solid fa-info-circle w-6 text-slate-400"></i> About Us</a>
+                <a href="#services"
+                    class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50 transition"><i
+                        class="fa-solid fa-layer-group w-6 text-slate-400"></i> Services</a>
+                <a href="#pricing"
+                    class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50 transition"><i
+                        class="fa-solid fa-tag w-6 text-slate-400"></i> Pricing</a>
+                <a href="#shop"
+                    class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50 transition"><i
+                        class="fa-solid fa-store w-6 text-slate-400"></i> Stationery Shop</a>
+                <a href="#contact"
+                    class="block px-4 py-3 mt-4 text-center rounded-xl text-base font-bold bg-brand-600 text-white shadow-lg shadow-brand-500/30">Contact
+                    Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern text-white pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900/80 to-slate-900/95"></div>
+
+        <!-- Decorative blobs -->
+        <div class="absolute top-20 right-0 w-72 h-72 bg-brand-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Text Content (Left/First) -->
+            <div class="text-center lg:text-left">
+                <div
+                    class="inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md shadow-lg">
+                    <span class="flex h-2 w-2 relative">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span class="text-slate-300 font-medium text-xs tracking-wide uppercase">Open Now: 8AM - 8PM</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 tracking-tight">
+                    Your Digital Needs <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-400">Sorted
+                        Instantly.</span>
+                </h1>
+                <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                    From urgent printing and graphic design to eCitizen applications and school stationery. We are the
+                    cyber cafe that gets it done right.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#shop"
+                        class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-xl shadow-brand-600/20 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-shopping-bag"></i> Shop Stationery
+                    </a>
+                    <a href="https://wa.me/254700123456"
+                        class="bg-slate-800/50 hover:bg-slate-800 text-white border border-slate-700 px-8 py-4 rounded-xl font-semibold transition-all backdrop-blur-sm flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i> Quick Inquiry
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div
+                    class="mt-10 flex flex-wrap justify-center lg:justify-start gap-6 text-slate-400 text-sm font-medium">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-brand-400"></i> Secure
+                        Services</div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-brand-400"></i> Fast
+                        Turnaround</div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-thumbs-up text-brand-400"></i> Trusted by
+                        Locals</div>
+                </div>
+            </div>
+
+            <!-- Image Content (Right/Second) -->
+            <div class="relative">
+                <div class="relative z-10 group">
+                    <!-- Owner Image Container -->
+                    <div
+                        class="relative rounded-2xl shadow-2xl border-4 border-slate-700/30 overflow-hidden h-[400px] lg:h-[500px] w-full max-w-md mx-auto lg:max-w-none bg-slate-800">
+                        <img src="jk.jpeg" alt="Job Karani - Owner"
+                            class="object-cover h-full w-full transform transition duration-700 group-hover:scale-105">
+
+                        <!-- Gradient Overlay -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent">
+                        </div>
+
+                        <!-- Owner Details Overlay -->
+                        <div class="absolute bottom-0 left-0 w-full p-6 sm:p-8">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span
+                                    class="bg-brand-500 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider shadow-lg">Founder</span>
+                                <div class="flex text-accent-500 text-xs gap-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white mb-1">Job Karani</h3>
+                            <p class="text-slate-300 text-sm italic">"Dedicated to serving your digital needs since
+                                2019."</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div
+                        class="absolute top-8 -right-4 lg:-right-8 bg-white p-3 lg:p-4 rounded-xl shadow-2xl flex items-center gap-3 lg:gap-4 animate-bounce-slow max-w-[200px] lg:max-w-xs z-20 border border-slate-100">
+                        <div class="bg-brand-100 p-2 lg:p-3 rounded-full text-brand-600">
+                            <i class="fa-solid fa-certificate text-lg lg:text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-900 font-bold text-sm lg:text-base">Certified Agent</p>
+                            <p class="text-slate-500 text-[10px] lg:text-xs">eCitizen & KRA Expert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Strip -->
+    <div class="bg-gradient-to-r from-accent-500 to-orange-500 text-white py-3 px-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 font-bold text-sm sm:text-base">
+                <i class="fa-solid fa-tags"></i>
+                <span>Student Offer: <span class="opacity-90 font-normal">Get 10% off printing bulk notes!</span></span>
+            </div>
+            <a href="#contact"
+                class="text-xs sm:text-sm bg-white/20 px-3 py-1 rounded hover:bg-white/30 transition">Claim Now</a>
+        </div>
+    </div>
+
+    <!-- NEW SECTION: Why Choose Us (White with Permanent Glow) -->
+    <section class="py-24 bg-white relative overflow-hidden border-b border-slate-100">
+        <!-- Background Ambient Glow (Subtle) -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-100/50 rounded-full blur-[100px] animate-pulse"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-100/50 rounded-full blur-[100px] animate-pulse"
+            style="animation-delay: 1s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">The JK Advantage</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Why Choose JK Cyber?</h2>
+                <p class="text-slate-600 mt-4 max-w-2xl mx-auto">We don't just print papers; we provide reliability.
+                    Experience the difference with our premium service standards.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1: Express Service (Blue Glow) -->
+                <div
+                    class="relative h-full bg-white rounded-2xl p-8 flex flex-col items-center text-center border border-blue-100 shadow-[0_0_35px_rgba(59,130,246,0.15)] transition-transform hover:-translate-y-1 duration-300">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-3xl mb-6 shadow-sm border border-blue-100">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-slate-900">Express Service</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">No long queues. We respect your time with fast
+                        turnarounds on all prints and services.</p>
+                </div>
+
+                <!-- Feature 2: Power Backup (Green Glow) -->
+                <div
+                    class="relative h-full bg-white rounded-2xl p-8 flex flex-col items-center text-center border border-green-100 shadow-[0_0_35px_rgba(34,197,94,0.15)] transition-transform hover:-translate-y-1 duration-300">
+                    <div
+                        class="w-16 h-16 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-3xl mb-6 shadow-sm border border-green-100">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-slate-900">Professionalism</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Our team is trained to handle all your needs with
+                        the utmost professionalism and care.</p>
+
+                </div>
+
+                <!-- Feature 3: Data Privacy (Purple Glow) -->
+                <div
+                    class="relative h-full bg-white rounded-2xl p-8 flex flex-col items-center text-center border border-purple-100 shadow-[0_0_35px_rgba(168,85,247,0.15)] transition-transform hover:-translate-y-1 duration-300">
+                    <div
+                        class="w-16 h-16 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-3xl mb-6 shadow-sm border border-purple-100">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-slate-900">Data Privacy</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Your documents and personal data are handled with
+                        the highest level of privacy and security.</p>
+                </div>
+
+                <!-- Feature 4: Expert Support (Orange Glow) -->
+                <div
+                    class="relative h-full bg-white rounded-2xl p-8 flex flex-col items-center text-center border border-orange-100 shadow-[0_0_35px_rgba(249,115,22,0.15)] transition-transform hover:-translate-y-1 duration-300">
+                    <div
+                        class="w-16 h-16 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-3xl mb-6 shadow-sm border border-orange-100">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-slate-900">Expert Support</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Stuck with eCitizen? Our trained staff guides you
+                        through every step of the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: How It Works -->
+    <section class="py-16 bg-slate-50 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">Simple Process</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">How It Works</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="relative">
+                    <div
+                        class="w-20 h-20 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-4 text-brand-600 text-2xl relative z-10">
+                        <i class="fa-solid fa-file-arrow-up"></i>
+                    </div>
+                    <div class="hidden md:block absolute top-10 left-1/2 w-full h-1 bg-slate-200 -z-0"></div>
+                    <h3 class="font-bold text-lg mb-2">1. Send or Visit</h3>
+                    <p class="text-slate-600 text-sm px-8">Send your files via WhatsApp/Email or visit our shop in
+                        person.</p>
+                </div>
+                <div class="relative">
+                    <div
+                        class="w-20 h-20 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-4 text-brand-600 text-2xl relative z-10">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <div class="hidden md:block absolute top-10 left-1/2 w-full h-1 bg-slate-200 -z-0"></div>
+                    <h3 class="font-bold text-lg mb-2">2. We Process</h3>
+                    <p class="text-slate-600 text-sm px-8">Our experts handle your printing, design, or application
+                        instantly.</p>
+                </div>
+                <div class="relative">
+                    <div
+                        class="w-20 h-20 bg-white shadow-md rounded-full flex items-center justify-center mx-auto mb-4 text-brand-600 text-2xl relative z-10">
+                        <i class="fa-solid fa-motorcycle"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">3. Pickup / Deliver</h3>
+                    <p class="text-slate-600 text-sm px-8">Collect your items or have them delivered by a rider to your
+                        location.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">What We Do Best</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-4">Everything You Need Under One Roof</h2>
+                <p class="text-slate-600">Stop moving from shop to shop. We handle your prints, designs, and online
+                    applications right here.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service 1 -->
+                <div
+                    class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-slate-100">
+                    <div class="h-48 relative">
+                        <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFByaW50aW5nJTIwJTI2JTIwUGhvdG9jb3B5aW5nfGVufDB8fDB8fHww"
+                            alt="Printing" class="w-full h-full object-cover">
+                        <div
+                            class="absolute bottom-0 left-0 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-tr-lg">
+                            Most Popular</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Printing & Photocopying</h4>
+                        <p class="text-slate-600 text-sm mb-4 flex-1">Crisp, clear prints for documents, thesis, and
+                            photos. We handle large volumes fast.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded border border-purple-200 font-bold">Color</span>
+                            <span
+                                class="bg-indigo-100 text-indigo-700 text-xs px-2 py-1 rounded border border-indigo-200 font-bold">Binding</span>
+                            <span
+                                class="bg-violet-100 text-violet-700 text-xs px-2 py-1 rounded border border-violet-200 font-bold">Lamination</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div
+                    class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-slate-100">
+                    <div class="h-48 relative">
+                        <img src="https://images.unsplash.com/photo-1740174459726-8c57d8366061?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Q3JlYXRpdmUlMjBHcmFwaGljJTIwRGVzaWdufGVufDB8fDB8fHww"
+                            alt="Design" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Creative Graphic Design</h4>
+                        <p class="text-slate-600 text-sm mb-4 flex-1">Need a logo, poster, or wedding card? Our
+                            designers create visuals that stand out.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded border border-pink-200 font-bold">Business
+                                Cards</span>
+                            <span
+                                class="bg-rose-100 text-rose-700 text-xs px-2 py-1 rounded border border-rose-200 font-bold">Flyers</span>
+                            <span
+                                class="bg-fuchsia-100 text-fuchsia-700 text-xs px-2 py-1 rounded border border-fuchsia-200 font-bold">Branding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div
+                    class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-slate-100">
+                    <div class="h-48 relative">
+                        <img src="https://plus.unsplash.com/premium_photo-1770456522134-8859792a0077?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YXBwbHklMjBvbmxpbmV8ZW58MHx8MHx8fDA%3D"
+                            alt="Online" class="w-full h-full object-cover">
+                        <div
+                            class="absolute bottom-0 left-0 bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-tr-lg">
+                            Expert Service</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Online Applications</h4>
+                        <p class="text-slate-600 text-sm mb-4 flex-1">Don't get stuck with government portals. We assist
+                            with registrations accurately.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded border border-green-200 font-bold">eCitizen</span>
+                            <span
+                                class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded border border-red-200 font-bold">KRA
+                                Returns</span>
+                            <span
+                                class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded border border-blue-200 font-bold">HELB/KUCCPS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div
+                    class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-slate-100">
+                    <div class="h-48 relative">
+                        <img src="https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGNvZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                            alt="Web Dev" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Web Design & Hosting</h4>
+                        <p class="text-slate-600 text-sm mb-4 flex-1">Get your business online with a modern, responsive
+                            website tailored to your brand.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-cyan-100 text-cyan-700 text-xs px-2 py-1 rounded border border-cyan-200 font-bold">Domains</span>
+                            <span
+                                class="bg-sky-100 text-sky-700 text-xs px-2 py-1 rounded border border-sky-200 font-bold">Hosting</span>
+                            <span
+                                class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded border border-blue-200 font-bold">SEO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div
+                    class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-slate-100">
+                    <div class="h-48 relative">
+                        <img src="https://images.unsplash.com/photo-1568871391149-449702439177?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fFN0YXRpb25lcmllc3xlbnwwfHwwfHx8MA%3D%3D"
+                            alt="Stationery" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Stationery Supplies</h4>
+                        <p class="text-slate-600 text-sm mb-4 flex-1">Quality school and office supplies. Wholesales and
+                            retail available.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded border border-orange-200 font-bold">Papers</span>
+                            <span
+                                class="bg-amber-100 text-amber-700 text-xs px-2 py-1 rounded border border-amber-200 font-bold">Files</span>
+                            <span
+                                class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded border border-yellow-200 font-bold">Pens</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div
+                    class="bg-slate-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-slate-100">
+                    <div class="h-48 relative">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Computer Training" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Computer Packages</h4>
+                        <p class="text-slate-600 text-sm mb-4 flex-1">Learn essential skills. Word, Excel, PowerPoint,
+                            and Internet usage.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-teal-100 text-teal-700 text-xs px-2 py-1 rounded border border-teal-200 font-bold">Cooming
+                                Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Training Curriculum -->
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2">
+                    <span class="text-accent-500 font-bold tracking-wider uppercase text-xs">Education</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-white mt-2 mb-6">Master Essential Digital Skills</h2>
+                    <p class="text-slate-300 mb-8 leading-relaxed">
+                        In today's world, computer literacy is mandatory. Join our short courses online designed for
+                        students, job seekers, and professionals.
+                        We offer hands-on training with individual computers for every student.
+                    </p>
+                    <a href="Master computer literacy.pdf"
+                        class="inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold px-8 py-4 rounded-xl transition shadow-lg shadow-accent-500/30">
+                        Download Syllabus
+                    </a>
+                </div>
+                <div class="lg:w-1/2 w-full">
+                    <div class="space-y-4">
+                        <!-- Course 1 -->
+                        <div
+                            class="bg-slate-800 p-6 rounded-xl border border-slate-700 flex gap-4 hover:border-accent-500 transition-colors">
+                            <div
+                                class="bg-slate-700 text-accent-500 w-12 h-12 rounded-lg flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-brands fa-microsoft"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white">Microsoft Office Suite</h3>
+                                <p class="text-slate-400 text-sm mb-2">Word, Excel, PowerPoint, Publisher</p>
+                                <span class="text-xs bg-slate-900 px-2 py-1 rounded text-slate-300">4 Weeks</span>
+                            </div>
+                        </div>
+                        <!-- Course 2 -->
+                        <div
+                            class="bg-slate-800 p-6 rounded-xl border border-slate-700 flex gap-4 hover:border-accent-500 transition-colors">
+                            <div
+                                class="bg-slate-700 text-brand-400 w-12 h-12 rounded-lg flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white">Internet & Email</h3>
+                                <p class="text-slate-400 text-sm mb-2">Browsing, Research, Email Etiquette, Security</p>
+                                <span class="text-xs bg-slate-900 px-2 py-1 rounded text-slate-300">1 Week</span>
+                            </div>
+                        </div>
+                        <!-- Course 3 -->
+                        <div
+                            class="bg-slate-800 p-6 rounded-xl border border-slate-700 flex gap-4 hover:border-accent-500 transition-colors">
+                            <div
+                                class="bg-slate-700 text-purple-400 w-12 h-12 rounded-lg flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white">Basic Graphic Design</h3>
+                                <p class="text-slate-400 text-sm mb-2">Introduction to Canva & CorelDRAW</p>
+                                <span class="text-xs bg-slate-900 px-2 py-1 rounded text-slate-300">2 Weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Requirements Checklist -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">Be Prepared</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">What to Carry</h2>
+                <p class="text-slate-600 mt-2">Save time by bringing the right documents for your application.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Checklist 1: eCitizen (Green Theme) -->
+                <div
+                    class="bg-green-50 rounded-2xl p-8 border border-green-100 hover:shadow-lg hover:shadow-green-100/50 transition-all">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="bg-green-200 text-green-700 w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-passport"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">eCitizen & Passport</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i>
+                            Original Birth Certificate</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i>
+                            Original ID Card</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i>
+                            Parents' ID Copies</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i> 3
+                            Passport Photos</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-600 mt-1"></i>
+                            eCitizen Login Details</li>
+                    </ul>
+                </div>
+
+                <!-- Checklist 2: KRA (Red Theme) -->
+                <div
+                    class="bg-red-50 rounded-2xl p-8 border border-red-100 hover:shadow-lg hover:shadow-red-100/50 transition-all relative">
+                    <div
+                        class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">
+                        Essential</div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-red-200 text-red-700 w-10 h-10 rounded-full flex items-center justify-center"><i
+                                class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">KRA Returns</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> KRA PIN
+                            Number</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> iTax
+                            Password</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> P9 Form
+                            (If Employed)</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> Email
+                            Address Access</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> Bank
+                            Details (If refund)</li>
+                    </ul>
+                </div>
+
+                <!-- Checklist 3: HELB/KUCCPS (Blue Theme) -->
+                <div
+                    class="bg-blue-50 rounded-2xl p-8 border border-blue-100 hover:shadow-lg hover:shadow-blue-100/50 transition-all">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-blue-200 text-blue-700 w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3 class="font-bold text-lg text-slate-900">HELB & KUCCPS</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-500 mt-1"></i> Index
+                            Number</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-500 mt-1"></i> National
+                            ID (Student)</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-500 mt-1"></i> Parents'
+                            IDs & Death Certs</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-500 mt-1"></i> Two
+                            Guarantors' IDs</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-500 mt-1"></i> Personal
+                            Bank Account</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Pricing Table -->
+    <section id="pricing" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">Transparent Costs</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Standard Service Pricing</h2>
+                <p class="text-slate-600 text-sm mt-2">No hidden fees. Bulk discounts available.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-white border border-slate-200 rounded-2xl p-8 hover:border-brand-300 transition-colors shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900">Printing & Copying</h3>
+                    <div class="my-4">
+                        <span class="text-4xl font-extrabold text-slate-900">Ksh 10</span>
+                        <span class="text-slate-500 text-sm">/page (B&W)</span>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3 check-list">
+                        <li>B&W Photocopy (Single)</li>
+                        <li>Color Printing: From Ksh 20</li>
+                        <li>Scanning: Ksh 10/page</li>
+                        <li>Binding: From Ksh 100</li>
+                    </ul>
+                    <a href="https://wa.me/254110868366?text=Hey%20Jk%20Cyber"
+                        class="block w-full text-center bg-slate-50 border border-slate-200 text-slate-700 font-bold py-3 mt-8 rounded-xl hover:bg-slate-100 transition">Send
+                        File</a>
+                </div>
+
+                <!-- Card 2 (Featured) -->
+                <div
+                    class="bg-brand-900 text-white rounded-2xl p-8 transform md:-translate-y-4 shadow-xl shadow-brand-900/20 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-accent-500 text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR
+                    </div>
+                    <h3 class="text-lg font-bold">Cyber Services</h3>
+                    <div class="my-4">
+                        <span class="text-4xl font-extrabold">Ksh 150</span>
+                        <span class="text-brand-200 text-sm">/service</span>
+                    </div>
+                    <ul class="text-sm text-brand-100 space-y-3 check-list">
+                        <li>eCitizen Applications</li>
+                        <li>KRA Returns (Nil)</li>
+                        <li>HELB Registration</li>
+                        <li>Good Conduct Application</li>
+                        <li>Passport Photos (4 copies)</li>
+                    </ul>
+                    <a href="https://wa.me/254110868366?text=Hey%20Jk%20Cyber%20I%20need%20services%20on%"
+                        class="block w-full text-center bg-brand-500 text-white font-bold py-3 mt-8 rounded-xl hover:bg-brand-400 transition">Book
+                        Now</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="bg-white border border-slate-200 rounded-2xl p-8 hover:border-brand-300 transition-colors shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900">Design & Web</h3>
+                    <div class="my-4">
+                        <span class="text-4xl font-extrabold text-slate-900">Custom</span>
+                        <span class="text-slate-500 text-sm">Quote</span>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-3 check-list">
+                        <li>Logo Design: From Ksh 1000</li>
+                        <li>Business Cards (100pcs): Ksh 1500</li>
+                        <li>Posters & Flyers</li>
+                        <li>Website Design: From Ksh 15k</li>
+                    </ul>
+                    <a href="https://wa.me/254110868366?text=Hey%20Jk%20Cyber%20I%20need%20a%20quote%20for%20website%20design"
+                        class="block w-full text-center bg-slate-50 border border-slate-200 text-slate-700 font-bold py-3 mt-8 rounded-xl hover:bg-slate-100 transition">Get
+                        Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Meet Our Team 
+    <section class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">The Faces Behind JK Cyber</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Meet Our Experts</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+               -- Team Member 1 --
+                <div class="text-center group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-slate-100 mb-4 group-hover:border-brand-200 transition-colors">
+                        <img src="jk.jpeg" alt="Job Karani" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900">Job Karani</h3>
+                    <p class="text-brand-600 text-sm font-medium uppercase tracking-wide mb-2">Cyber Manager</p>
+                    <p class="text-slate-500 text-sm">The go-to guy for all government applications and technical support.</p>
+                </div>
+                Team Member 2 --
+                <div class="text-center group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-slate-100 mb-4 group-hover:border-brand-200 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Sarah" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900">Sarah Wanjiku</h3>
+                    <p class="text-brand-600 text-sm font-medium uppercase tracking-wide mb-2">Web Designer</p>
+                    <p class="text-slate-500 text-sm">designing and developing websites</p>
+                </div>
+                -- Team Member 3 --
+                <div class="text-center group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-slate-100 mb-4 group-hover:border-brand-200 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Mike" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900">Mike Omondi</h3>
+                    <p class="text-brand-600 text-sm font-medium uppercase tracking-wide mb-2">IT Technician</p>
+                    <p class="text-slate-500 text-sm">Hardware repairs, software installation, and network troubleshooting.</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+                <div>
+                    <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">Portfolio</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2">Recent Works</h2>
+                </div>
+                <p class="text-slate-500 text-sm mt-4 md:mt-0">Real examples of what we do.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="relative group overflow-hidden rounded-xl h-64 shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                        alt="Business Cards"
+                        class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 portfolio-overlay flex flex-col justify-end p-4">
+                        <span class="text-white font-bold text-lg leading-tight">Business Cards</span>
+                        <span class="text-slate-300 text-xs">Design & Print</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl h-64 shadow-md cursor-pointer">
+                    <img src="w2.png" alt="Websites"
+                        class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 portfolio-overlay flex flex-col justify-end p-4">
+                        <span class="text-white font-bold text-lg leading-tight">Websites</span>
+                        <span class="text-slate-300 text-xs">Development</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl h-64 shadow-md cursor-pointer">
+                    <img src="1.png" alt="ID Cards"
+                        class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 portfolio-overlay flex flex-col justify-end p-4">
+                        <span class="text-white font-bold text-lg leading-tight">Company IDs</span>
+                        <span class="text-slate-300 text-xs">Plastic Printing</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl h-64 shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                        alt="Banners" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 portfolio-overlay flex flex-col justify-end p-4">
+                        <span class="text-white font-bold text-lg leading-tight">Large Banners</span>
+                        <span class="text-slate-300 text-xs">Marketing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">JK Cyber Shop</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2">Best Selling Items</h2>
+                </div>
+                <a href="#"
+                    class="inline-flex items-center gap-2 text-brand-600 font-bold bg-slate-50 px-4 py-2 rounded-full shadow-sm text-sm border border-slate-200">
+                    View Full Catalog <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Product 1 -->
+                <div
+                    class="product-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border border-slate-100">
+                    <div class="h-56 bg-white relative p-6 flex items-center justify-center">
+                        <img src="jk.webp" alt="Paper" class="max-h-full max-w-full object-contain">
+                        <div
+                            class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded">
+                            HOT</div>
+                    </div>
+                    <div class="p-5 border-t border-slate-50 bg-slate-50/50 flex-1 flex flex-col">
+                        <div class="text-[10px] text-brand-600 font-bold uppercase tracking-wider mb-1">Office Paper
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 text-lg">A4 Printing Paper (Ream)</h4>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xl font-bold text-slate-900">Ksh 700.00</span>
+                            <span class="text-xs text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">500
+                                Sheets</span>
+                        </div>
+                        <button onclick="addToCart(this, 'A4 Paper')"
+                            class="w-full mb-2 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition active:scale-95 text-sm shadow-lg shadow-slate-900/10">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div
+                    class="product-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border border-slate-100">
+                    <div class="h-56 bg-white relative p-6 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1523292643061-ed55f8c45178?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHBlbnN8ZW58MHx8MHx8fDA%3D"
+                            alt="Pens" class="max-h-full max-w-full object-contain">
+                    </div>
+                    <div class="p-5 border-t border-slate-50 bg-slate-50/50 flex-1 flex flex-col">
+                        <div class="text-[10px] text-brand-600 font-bold uppercase tracking-wider mb-1">Writing</div>
+                        <h4 class="font-bold text-slate-900 mb-2 text-lg">Pen</h4>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xl font-bold text-slate-900">Ksh 10.00</span>
+                            <span
+                                class="text-xs text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">Blue/Black</span>
+                        </div>
+                        <button onclick="addToCart(this, 'Gel Pens')"
+                            class="w-full mb-2 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition active:scale-95 text-sm shadow-lg shadow-slate-900/10">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div
+                    class="product-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border border-slate-100">
+                    <div class="h-56 bg-white relative p-6 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1750935578389-6e1445f5fd8d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Qk9YJTIwRklMRXxlbnwwfHwwfHx8MA%3D%3D"
+                            alt="Files" class="max-h-full max-w-full object-contain">
+                    </div>
+                    <div class="p-5 border-t border-slate-50 bg-slate-50/50 flex-1 flex flex-col">
+                        <div class="text-[10px] text-brand-600 font-bold uppercase tracking-wider mb-1">Filing</div>
+                        <h4 class="font-bold text-slate-900 mb-2 text-lg">Spring File</h4>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xl font-bold text-slate-900">Ksh 60.00</span>
+                            <span
+                                class="text-xs text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">Durable</span>
+                        </div>
+                        <button onclick="addToCart(this, 'Box File')"
+                            class="w-full mb-2 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition active:scale-95 text-sm shadow-lg shadow-slate-900/10">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div
+                    class="product-card bg-white rounded-2xl overflow-hidden flex flex-col h-full border border-slate-100">
+                    <div class="h-56 bg-white relative p-6 flex items-center justify-center">
+                        <img src="https://plus.unsplash.com/premium_photo-1723802573606-f3828a8975c8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U0NJRU5USUZJQyUyMENhbGN1bGF0b3J8ZW58MHx8MHx8fDA%3D"
+                            alt="Calculator" class="max-h-full max-w-full object-contain">
+                    </div>
+                    <div class="p-5 border-t border-slate-50 bg-slate-50/50 flex-1 flex flex-col">
+                        <div class="text-[10px] text-brand-600 font-bold uppercase tracking-wider mb-1">Electronics
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2 text-lg">Scientific Calculator</h4>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xl font-bold text-slate-900">Ksh 1200.00</span>
+                            <span
+                                class="text-xs text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">Battery
+                                + Solar</span>
+                        </div>
+                        <button onclick="addToCart(this, 'Calculator')"
+                            class="w-full mb-2 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition active:scale-95 text-sm shadow-lg shadow-slate-900/10">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Tech Tips & Blog -->
+    <section class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">Helpful Guides</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2">Latest Tech Tips</h2>
+                </div>
+                <a href="#" class="text-brand-600 font-bold text-sm hover:underline mt-4 md:mt-0">View All Articles
+                    &rarr;</a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <article
+                    class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-all">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                        alt="KRA" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-slate-500 mb-3">
+                            <span class="bg-brand-50 text-brand-600 px-2 py-0.5 rounded-full font-bold">KRA</span>
+                            <span>• 2 days ago</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 mb-2">How to File Nil Returns in 2 Minutes</h3>
+                        <p class="text-slate-600 text-sm mb-4">Don't get penalized! Follow these simple steps to file
+                            your KRA nil returns using the iTax portal.</p>
+                        <a href="https://wa.me/254110868366?text=Hey%20Jk%20Cyber"
+                            class="text-brand-600 font-bold text-sm hover:underline">Contact me</a>
+                    </div>
+                </article>
+                <article
+                    class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-all">
+                    <img src="ecitizen-logo.webp" alt="Password" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-slate-500 mb-3">
+                            <span class="bg-brand-50 text-brand-600 px-2 py-0.5 rounded-full font-bold">eCitizen</span>
+                            <span>• 1 week ago</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 mb-2">Forgot eCitizen Password?</h3>
+                        <p class="text-slate-600 text-sm mb-4">Locked out of your account? Here is the safe way to reset
+                            your password and recover your account.</p>
+                        <a href="#" class="text-brand-600 font-bold text-sm hover:underline">Read Guide</a>
+                    </div>
+                </article>
+                <article
+                    class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-all">
+                    <img src="Printing-Papers-Nuria-Kenya.webp" alt="Paper" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-slate-500 mb-3">
+                            <span
+                                class="bg-brand-50 text-brand-600 px-2 py-0.5 rounded-full font-bold">Stationery</span>
+                            <span>• 2 weeks ago</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 mb-2">Choosing the Right Printing Paper</h3>
+                        <p class="text-slate-600 text-sm mb-4">GSM matters! Learn the difference between standard office
+                            paper and premium quality for official documents.</p>
+                        <a href="#" class="text-brand-600 font-bold text-sm hover:underline">Read Guide</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: FAQ -->
+    <section class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">Got Questions?</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-slate-50 rounded-xl shadow-sm border border-slate-200">
+                    <summary
+                        class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-slate-800">
+                        <span>Do you offer delivery services?</span>
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm">
+                        Yes! We partner with local riders to deliver documents and stationery within Nairobi. Delivery
+                        fees depend on your location.
+                    </div>
+                </details>
+                <details class="group bg-slate-50 rounded-xl shadow-sm border border-slate-200">
+                    <summary
+                        class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-slate-800">
+                        <span>How do I pay?</span>
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm">
+                        We accept Cash and M-Pesa. For online orders via WhatsApp, Our Phone Number is +254110868366.
+                    </div>
+                </details>
+                <details class="group bg-slate-50 rounded-xl shadow-sm border border-slate-200">
+                    <summary
+                        class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-slate-800">
+                        <span>Can I email my documents for printing?</span>
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm">
+                        Absolutely. Email us at jobcyber254@gmail.com or send the file via WhatsApp. We will print it
+                        and have it ready for collection.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Brands (Ticker) -->
+    <section class="py-10 bg-white overflow-hidden border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 text-center mb-8">
+            <span class="text-brand-600 font-bold uppercase text-[10px] tracking-widest">Trusted Brands We Stock</span>
+        </div>
+        <div class="relative w-full overflow-hidden">
+            <div class="flex animate-scroll whitespace-nowrap gap-16 items-center select-none tracking-tight">
+
+                <!-- Brand 1: HP -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-laptop text-3xl text-blue-600 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-blue-600">HP</span>
+                </div>
+
+                <!-- Brand 2: Canon -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-camera text-3xl text-red-600 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-red-600">Canon</span>
+                </div>
+
+                <!-- Brand 3: Epson -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-print text-3xl text-blue-800 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-blue-800">Epson</span>
+                </div>
+
+                <!-- Brand 4: Bic -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-pen-fancy text-3xl text-orange-500 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-orange-500">Bic</span>
+                </div>
+
+                <!-- Brand 5: Samsung -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-mobile-screen text-3xl text-blue-700 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-blue-700">Samsung</span>
+                </div>
+
+                <!-- Brand 6: Kasuku -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-book-open text-3xl text-green-600 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-green-600">Kasuku</span>
+                </div>
+
+                <!-- Brand 7: Pelikan -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-feather-pointed text-3xl text-cyan-800 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-cyan-800">Pelikan</span>
+                </div>
+
+                <!-- Brand 8: Sony -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-headphones text-3xl text-slate-900 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-slate-900">Sony</span>
+                </div>
+
+                <!-- DUPLICATE FOR SCROLL LOOP -->
+
+                <!-- Brand 1: HP -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-laptop text-3xl text-blue-600 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-blue-600">HP</span>
+                </div>
+
+                <!-- Brand 2: Canon -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-camera text-3xl text-red-600 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-red-600">Canon</span>
+                </div>
+
+                <!-- Brand 3: Epson -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-print text-3xl text-blue-800 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-blue-800">Epson</span>
+                </div>
+
+                <!-- Brand 4: Bic -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-pen-fancy text-3xl text-orange-500 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-orange-500">Bic</span>
+                </div>
+
+                <!-- Brand 5: Samsung -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-mobile-screen text-3xl text-blue-700 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-blue-700">Samsung</span>
+                </div>
+
+                <!-- Brand 6: Kasuku -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-book-open text-3xl text-green-600 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-green-600">Kasuku</span>
+                </div>
+
+                <!-- Brand 7: Pelikan -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-feather-pointed text-3xl text-cyan-800 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-cyan-800">Pelikan</span>
+                </div>
+
+                <!-- Brand 8: Sony -->
+                <div class="flex flex-col items-center gap-2 group cursor-default">
+                    <i
+                        class="fa-solid fa-headphones text-3xl text-slate-900 transform group-hover:-translate-y-1 transition-transform"></i>
+                    <span class="text-2xl font-black uppercase text-slate-900">Sony</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-xs">Testimonials</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Happy Customers</h2>
+            </div>
+
+            <div
+                class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-3 md:overflow-visible">
+                <!-- Review 1 -->
+                <div
+                    class="snap-center shrink-0 w-80 md:w-auto bg-white p-6 rounded-2xl relative border border-slate-100 shadow-sm">
+                    <div class="text-accent-500 text-sm mb-3 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic text-sm">"JK Cyber helped me apply for my eCitizen passport
+                        quickly. They are very knowledgeable and professional."</p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-brand-200 rounded-full flex items-center justify-center text-brand-700 font-bold text-sm">
+                            VS</div>
+                        <div>
+                            <p class="font-bold text-slate-900 text-sm">Victor Steve</p>
+                            <p class="text-[10px] text-slate-500 uppercase">Charis studios</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div
+                    class="snap-center shrink-0 w-80 md:w-auto bg-white p-6 rounded-2xl relative border border-slate-100 shadow-sm">
+                    <div class="text-accent-500 text-sm mb-3 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic text-sm">"The stationery quality is excellent and they deliver
+                        on time. My go-to place for all office supplies."</p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center text-purple-700 font-bold text-sm">
+                            BH</div>
+                        <div>
+                            <p class="font-bold text-slate-900 text-sm">Dr. Boniface N.</p>
+                            <p class="text-[10px] text-slate-500 uppercase">Bona Heals Medical</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div
+                    class="snap-center shrink-0 w-80 md:w-auto bg-white p-6 rounded-2xl relative border border-slate-100 shadow-sm">
+                    <div class="text-accent-500 text-sm mb-3 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic text-sm">"They designed my company website and logo. I've
+                        received so many compliments on the new look!"</p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center text-blue-700 font-bold text-sm">
+                            JM</div>
+                        <div>
+                            <p class="font-bold text-slate-900 text-sm">Sir Mike</p>
+                            <p class="text-[10px] text-slate-500 uppercase">Entrepreneur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Newsletter -->
+    <section class="py-20 bg-brand-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl font-bold mb-4">Stay Updated & Save Money</h2>
+            <p class="text-brand-200 mb-8 max-w-xl mx-auto">Subscribe to our newsletter for exclusive student discounts,
+                new product alerts, and helpful tech guides delivered to your inbox.</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto"
+                onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                <input type="email" placeholder="Enter your email address"
+                    class="flex-1 px-6 py-4 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    required>
+                <button type="submit"
+                    class="bg-accent-500 hover:bg-accent-600 text-white font-bold px-8 py-4 rounded-xl transition shadow-lg shadow-accent-500/30">
+                    Subscribe
+                </button>
+            </form>
+            <p class="text-xs text-brand-300 mt-4"><i class="fa-solid fa-lock"></i> No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section with Map -->
+    <section id="contact" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+                <!-- Contact Info -->
+
+                <div class="order-2 lg:order-1">
+                    <span class="text-brand-400 font-bold tracking-wider uppercase text-xs">Contact Us</span>
+                    <h3 class="text-3xl font-bold text-white mt-2 mb-6">Let's Connect</h3>
+                    <p class="text-slate-400 mb-8">We are located in the heart of the city. Stop by for any inquiries or
+                        services.</p>
+
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/5 p-3 rounded-lg text-brand-400 mt-1 border border-white/10">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Visit Us</h4>
+                                <p class="text-slate-400 text-sm">Ndunyu Chege<br>Murang'a, Kenya</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/5 p-3 rounded-lg text-brand-400 mt-1 border border-white/10">
+                                <i class="fa-solid fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Call or WhatsApp</h4>
+                                <p class="text-slate-400 text-sm"><a href="tel:+254110868366">+254110868366</a></p>
+                                <p class="text-slate-400 text-sm"><a
+                                        href="mailto:jobcyber254@gmail.com">jobcyber254@gmail.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embedded Map -->
+                    <div class="w-full h-56 bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 shadow-lg">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3528905707126!2d36.913793999999996!3d-0.8751699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1828c93745da4cd1%3A0x58b99ee9f4838b0d!2sJob%20Cyber%20Services!5e0!3m2!1sen!2ske!4v1771265052466!5m2!1sen!2ske"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white text-slate-900 p-8 rounded-2xl shadow-2xl order-1 lg:order-2">
+                    <h3 class="text-2xl font-bold mb-6">Send a Message</h3>
+                    <form id="contactForm" action="https://formspree.io/f/xpqjrpbr" method="POST" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Name</label>
+                                <input type="text" required
+                                    class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition text-sm"
+                                    placeholder="eg,Job K.">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Phone</label>
+                                <input type="tel" required
+                                    class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition text-sm"
+                                    placeholder="07...">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Service
+                                Interest</label>
+                            <select id="service-type"
+                                class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition text-sm">
+                                <option value="general">General Inquiry</option>
+                                <option value="stationery">Stationery Order</option>
+                                <option value="printing">Printing / Scanning</option>
+                                <option value="graphics">Graphic Design</option>
+                                <option value="web-dev">Web Development</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Message</label>
+                            <textarea rows="4" required
+                                class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition text-sm"
+                                placeholder="Tell us how we can help..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 rounded-xl transition shadow-xl shadow-brand-500/20 active:scale-95">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900 mb-16 md:mb-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+
+                <!-- Column 1: Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-brand-600 text-white p-2 rounded-lg">
+                            <i class="fa-solid fa-bolt text-lg"></i>
+                        </div>
+                        <span class="font-bold text-2xl text-white">JK <span class="text-brand-500">CYBER</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Your trusted digital partner in Nairobi. We bridge the gap between you and digital services with
+                        speed, accuracy, and integrity.
+                    </p>
+                    <div class="pt-4">
+                        <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Opening Hours</h4>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex justify-between border-b border-slate-900 pb-1"><span>Mon - Fri:</span>
+                                <span class="text-white">6:00 AM - 8:00 PM</span></li>
+                            <li class="flex justify-between border-b border-slate-900 pb-1"><span>Saturday:</span> <span
+                                    class="text-white">6:00 AM - 8:00 PM</span></li>
+                            <li class="flex justify-between border-b border-slate-900 pb-1"><span>Sunday:</span> <span
+                                    class="text-brand-500">2:00 PM - 7:00 PM</span></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Quick Links</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#about" class="hover:text-brand-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i> About Us</a></li>
+                        <li><a href="#services" class="hover:text-brand-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i> Our Services</a></li>
+                        <li><a href="#pricing" class="hover:text-brand-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i> Pricing Guide</a></li>
+                        <li><a href="#shop" class="hover:text-brand-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i> Stationery Shop</a></li>
+                        <li><a href="#portfolio" class="hover:text-brand-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i> Recent Work</a></li>
+                        <li><a href="#contact" class="hover:text-brand-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i> Contact Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Government Portals -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Quick Portal Access</h3>
+                    <p class="text-xs text-slate-500 mb-4">Direct links to common Kenyan government services:</p>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://accounts.ecitizen.go.ke/en" target="_blank"
+                                class="hover:text-green-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs"></i> eCitizen Portal</a></li>
+                        <li><a href="https://itax.kra.go.ke/KRA-Portal/" target="_blank"
+                                class="hover:text-red-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs"></i> KRA iTax</a></li>
+                        <li><a href="https://timsvirl.ntsa.go.ke/" target="_blank"
+                                class="hover:text-green-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs"></i> NTSA (TIMS)</a></li>
+                        <li><a href="https://portal.helb.co.ke/" target="_blank"
+                                class="hover:text-blue-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs"></i> HELB Student Portal</a>
+                        </li>
+                        <li><a href="https://students.kuccps.net/" target="_blank"
+                                class="hover:text-brand-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs"></i> KUCCPS Portal</a></li>
+                        <li><a href="https://immigration.go.ke/" target="_blank"
+                                class="hover:text-orange-400 transition flex items-center gap-2"><i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Immigration
+                                (Passports)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact & Socials -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Connect With Us</h3>
+                    <div class="space-y-4 text-sm mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="mt-1 bg-brand-900/50 p-2 rounded text-brand-500"><i
+                                    class="fa-solid fa-location-dot"></i></div>
+                            <span>Ndunyu Chege, Gatanga<br>Murang'a, Kenya</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="bg-brand-900/50 p-2 rounded text-brand-500"><i class="fa-solid fa-phone"></i>
+                            </div>
+                            <span><a href="tel:+254110868366">+254110868366</a></span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="bg-brand-900/50 p-2 rounded text-brand-500"><i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <span><a href="mailto:jobcyber254@gmail.com">jobcyber254@gmail.com</a></span>
+                        </div>
+                    </div>
+
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3">Follow Us</h4>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition duration-300 transform hover:-translate-y-1"><i
+                                class="fa-brands fa-facebook-f text-lg"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-black hover:text-white transition duration-300 transform hover:-translate-y-1"><i
+                                class="fa-brands fa-x-twitter text-lg"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-[#E4405F] hover:text-white transition duration-300 transform hover:-translate-y-1"><i
+                                class="fa-brands fa-instagram text-lg"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition duration-300 transform hover:-translate-y-1"><i
+                                class="fa-brands fa-whatsapp text-lg"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center hover:bg-[#000000] hover:text-white transition duration-300 transform hover:-translate-y-1"><i
+                                class="fa-brands fa-tiktok text-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 JK Cyber Services. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast flex items-center justify-center gap-3">
+        <i class="fa-solid fa-circle-check text-green-400 text-xl"></i>
+        <div>
+            <span class="block font-bold text-sm">Added to Cart!</span>
+            <span class="text-xs text-slate-400" id="toast-message">Item is ready for checkout.</span>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Sticky Navbar Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Cart Logic
+        let cartCount = 0;
+        const cartCountEls = [document.getElementById('cart-count'), document.getElementById('mobile-cart-count')];
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toast-message');
+
+        function addToCart(btn, itemName) {
+            // Update Count
+            cartCount++;
+            cartCountEls.forEach(el => {
+                el.textContent = cartCount;
+                el.classList.remove('hidden');
+            });
+
+            // Update Toast Content
+            toastMsg.textContent = `${itemName} has been added.`;
+            toast.classList.add('show');
+
+            // Button Feedback
+            const originalText = btn.innerText;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
+            btn.classList.add('bg-green-600');
+
+            // Hide Toast & Reset Button
+            setTimeout(() => {
+                toast.classList.remove('show');
+                btn.innerText = originalText;
+                btn.classList.remove('bg-green-600');
+            }, 2500);
+        }
+
+        // Form Handling
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+
+            btn.textContent = 'Sending Message...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Sent Successfully!';
+                btn.classList.replace('bg-brand-600', 'bg-green-600');
+
+                setTimeout(() => {
+                    this.reset();
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-75');
+                    btn.classList.replace('bg-green-600', 'bg-brand-600');
+                    alert("Thank you! We'll reply via WhatsApp or Call shortly.");
+                }, 2000);
+            }, 1500);
+        });
+    </script>
+</body>
+
+</html>
